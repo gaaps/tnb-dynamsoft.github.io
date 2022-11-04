@@ -68,16 +68,19 @@ class _ScannerWidgetState extends State<ScannerWidget> {
 
     print("WEBVIEW VIDEO SIZE : ${_controller.webviewVideoSize}");
 
-    int appliedHeight;
-    int appliedWidth;
-    if (_controller.webviewVideoSize!.width >
-        _controller.webviewVideoSize!.height) {
-      appliedWidth = _controller.webviewVideoSize!.width.toInt();
-      appliedHeight = _controller.webviewVideoSize!.height.toInt();
-    } else {
-      appliedWidth = _controller.webviewVideoSize!.height.toInt();
-      appliedHeight = _controller.webviewVideoSize!.width.toInt();
-    }
+    int appliedWidth = _controller.webviewVideoSize!.width.toInt();
+    int appliedHeight = _controller.webviewVideoSize!.height.toInt();
+
+    // int appliedHeight;
+    // int appliedWidth;
+    // if (_controller.webviewVideoSize!.width >
+    //     _controller.webviewVideoSize!.height) {
+    //   appliedWidth = _controller.webviewVideoSize!.width.toInt();
+    //   appliedHeight = _controller.webviewVideoSize!.height.toInt();
+    // } else {
+    //   appliedWidth = _controller.webviewVideoSize!.height.toInt();
+    //   appliedHeight = _controller.webviewVideoSize!.width.toInt();
+    // }
 
     print("Applied dimensions : $appliedWidth x $appliedHeight");
 
