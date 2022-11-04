@@ -49,7 +49,7 @@ class _ScannerWidgetState extends State<ScannerWidget> {
   Future<void> _setup() async {
     await _dynamsoft
         .setLicense(
-        "DLS2eyJoYW5kc2hha2VDb2RlIjoiMTAxMzcxNzgyLVRYbFhaV0pRY205cVgyUmljZyIsIm9yZ2FuaXphdGlvbklEIjoiMTAxMzcxNzgyIiwiY2hlY2tDb2RlIjo2NjY5NjI1MDF9")
+            "DLS2eyJoYW5kc2hha2VDb2RlIjoiMTAxMzcxNzgyLVRYbFhaV0pRY205cVgyUmljZyIsIm9yZ2FuaXphdGlvbklEIjoiMTAxMzcxNzgyIiwiY2hlY2tDb2RlIjo2NjY5NjI1MDF9")
         .catchError((e) {});
     await _dynamsoft.init();
     await _dynamsoft.setParameters(_dynamsoftParameters);
@@ -68,12 +68,25 @@ class _ScannerWidgetState extends State<ScannerWidget> {
 
     print("WEBVIEW VIDEO SIZE : ${_controller.webviewVideoSize}");
 
+    int appliedHeight;
+    int appliedWidth;
+    if (_controller.webviewVideoSize!.width >
+        _controller.webviewVideoSize!.height) {
+      appliedWidth = _controller.webviewVideoSize!.width.toInt();
+      appliedHeight = _controller.webviewVideoSize!.height.toInt();
+    } else {
+      appliedWidth = _controller.webviewVideoSize!.height.toInt();
+      appliedHeight = _controller.webviewVideoSize!.width.toInt();
+    }
+
+    print("Applied dimensions : $appliedWidth x $appliedHeight");
+
     _isScanning = true;
     final List<BarcodeResult> results = await _dynamsoft.decodeImageBuffer(
       Uint8List.fromList(imageData),
-      _controller.width,
-      _controller.height,
-      _controller.width * 4,
+      appliedWidth,
+      appliedHeight,
+      appliedWidth * 4,
       10, // TODO: replace with Dynamsoft Capture Vision when it's out
     );
     print("Barcodes found : ${results.map((res) => res.text).toList()}");
