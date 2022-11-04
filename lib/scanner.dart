@@ -65,6 +65,9 @@ class _ScannerWidgetState extends State<ScannerWidget> {
     if (_isScanning ||
         imageData == null ||
         _controller.webviewVideoSize == null) return;
+
+    print("WEBVIEW VIDEO SIZE : ${_controller.webviewVideoSize}");
+
     _isScanning = true;
     final List<BarcodeResult> results = await _dynamsoft.decodeImageBuffer(
       Uint8List.fromList(imageData),
